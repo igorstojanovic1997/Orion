@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Orion.Models.Plan>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Plan</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var plan in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(plan.Name, "Details", "Plans", new { id = plan.Id }, null)</td>
+                <td>@plan.Price</td>
+                <td>@plan.Description</td>
+                <td>@plan.Category</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,16 @@
+﻿@model Orion.ViewModels.RandomPlanViewModel
+@{
+    ViewBag.Title = "Random";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Plan.Name</h2>
+
+<ul>
+
+    @foreach (var contract in Model.Contracts)
+    {
+        <li>@contract.Name</li>
+    }
+
+</ul>

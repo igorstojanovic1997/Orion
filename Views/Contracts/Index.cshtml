@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Orion.Models.Contract>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Contracts</h2>
+
+<table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Contract</th>
+        <th>Duration(Months)</th>
+        <th>Discount Rate</th>
+        <th>Fee(Dinars)</th>
+        <th>Gratis Period(Months)</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var contract in Model)
+    {
+        <tr>
+            <td>@Html.ActionLink(contract.Username, "Details", "Contracts", new { id = contract.Id }, null)</td>
+            <td>@contract.ContractType.Duration</td>
+            <td>@contract.ContractType.DiscountRate%</td>
+            <td>@contract.ContractType.Fee</td>
+            <td>@contract.ContractType.GratisPeriod</td>
+        </tr>
+    }
+    </tbody>
+</table>
