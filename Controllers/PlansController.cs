@@ -4,8 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Orion.Models;
-using Orion.ViewModels;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using AutoMapper;
+using Orion.ViewModels;
 
 namespace Orion.Controllers
 {
@@ -23,13 +25,15 @@ namespace Orion.Controllers
             _context.Dispose();
         }
 
+        [HttpGet]
         public ViewResult Index()
         {
-            var plans = _context.Plans.ToList();
+            var viewModel = new PlanFormViewModel();
 
-            return View(plans);
+            return View(viewModel);
         }
 
+        [HttpGet]
         public ActionResult Details(int id)
         {
             var plan = _context.Plans.SingleOrDefault(m => m.Id == id);
@@ -37,6 +41,18 @@ namespace Orion.Controllers
             return View(plan);
         }
 
-       
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Save(PlanFormViewModel viewModel)
+        {
+            var plan = Mapper.Map<PlanFormViewModel, Plan>(viewModel);
+            
+            _context.Plans.AddOrUpdate(t => t.Id, plan);
+            _context.SaveChanges();
+
+            return Json(new {message = "Created/Updated successfully"});
+        }
+
+
     }
 }

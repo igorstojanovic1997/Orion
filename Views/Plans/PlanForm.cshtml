@@ -1,0 +1,38 @@
+﻿@model Orion.ViewModels.PlanFormViewModel
+@{
+    ViewBag.Title = "Add/Edit plan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Save", "Plans", FormMethod.Post))
+{
+    <div class="hidden">
+        @Html.HiddenFor(m => m.Id)
+        @Html.AntiForgeryToken()
+    </div>
+
+    @Html.ValidationSummary(true, "Please fix the following errors.")
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Category)
+        @Html.EnumDropDownListFor(m => m.Category, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Category)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Price)
+        @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Price)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Description)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+

@@ -1,29 +1,144 @@
-﻿@model IEnumerable<Orion.Models.Plan>
+﻿@model Orion.ViewModels.PlanFormViewModel
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Plans(Paketi)</h2>
 
-<table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>Plan</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Category</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var plan in Model)
+<div class="container">
+    <div id="formDiv" class="mb-4">
+        @using (Html.BeginForm("Save", "Plans", FormMethod.Post, new { id = "planForm" }))
         {
-            <tr>
-                <td>@Html.ActionLink(plan.Name, "Details", "Plans", new { id = plan.Id }, null)</td>
-                <td>@plan.Price</td>
-                <td>@plan.Description</td>
-                <td>@plan.Category</td>
-            </tr>
+            <div class="hidden">
+                @Html.HiddenFor(m => m.Id)
+                @Html.AntiForgeryToken()
+            </div>
+
+            @Html.ValidationSummary(true, "Please fix the following errors.")
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Category)
+                @Html.EnumDropDownListFor(m => m.Category, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Category)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Price)
+                @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Price)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Description)
+                @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Description)
+            </div>
+
+            <button type="submit" id="submitBtn" class="btn btn-primary">Save</button>
         }
-    </tbody>
-</table>
+    </div>
+
+    <table id="plansTable" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Plan</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("table#plansTable").DataTable({
+                ajax: {
+                    url: "api/plans",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "Name"
+                    },
+                    {
+                        data: "Price"
+                    },
+                    {
+                        data: "Description"
+                    },
+                    {
+                        data: "Category"
+                    },
+                    {
+                        data: "Id",
+                        render: function (data) {
+                            return "<div class='btn-toolbar' role='toolbar'><div class='btn-group mr-2' role='group'>" +
+                                "<button class='btn btn-danger js-delete' data-plan-id=" +
+                                data +
+                                ">Delete" +
+                                "</button>" +
+                                "</div>" +
+                                "<div class='btn-group' role='group'>" +
+                                "<button class='btn btn-warning js-edit' data-plan-id=" +
+                                data +
+                                ">Edit" +
+                                "</button>" +
+                                "</div>" +
+                                "</div>";
+                        }
+                    }
+                ]
+            });
+
+            $("table#plansTable").on("click",
+                ".js-delete",
+                function () {
+                    var button = $(this);
+                    bootbox.confirm("Are you sure you want to delete this plan?",
+                        function (result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "api/plans/" + button.attr("data-plan-id"),
+                                    method: "DELETE",
+                                    success: function () {
+                                        table.row(button.parents("tr")).remove().draw();
+                                    }
+                                });
+                            }
+                        });
+                });
+
+            $('#submitBtn').click(function (event) {
+                event.preventDefault();
+                var url = $("#planForm").attr('action');
+                var method = $("#planForm").attr('method');
+                var formData = $("#planForm").serialize();
+
+                $.ajax({
+                    url: url,
+                    method: method,
+                    data: formData
+                }).done(function (data) {
+                    $("table#plansTable").DataTable().ajax.reload();
+                    if (data.message != undefined) {
+                        toastr.success(data.message);
+                    }
+                }).error(function () {
+
+                });
+
+            });
+
+        });
+    </script>
+}

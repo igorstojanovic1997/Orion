@@ -22,6 +22,7 @@ namespace Orion.Models
     {
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<Plan> Plans { get; set; }
+        public DbSet<ContractHistory> ContractHistories { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
