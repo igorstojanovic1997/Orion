@@ -125,9 +125,10 @@ C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.UpdateContrac
 C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.UpdateModel.resources
 C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.UpdateContractPlanModel.resources
 C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.UpdateContractPlanModelPrimaryKey.resources
-C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.csprojAssemblyReference.cache
 C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.UpdateContractHistory.resources
 C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.UpdateContractHistoryDropPlanId.resources
 C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.UpdateContractHistoryRevertDrop.resources
 C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.AddDateTimeCreatedToContract.resources
 C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.AddDateTimeCreatedNullable.resources
+C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.AddSumToContractHistory.resources
+C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.csprojAssemblyReference.cache

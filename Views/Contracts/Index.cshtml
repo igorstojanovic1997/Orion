@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Orion.Models.ContractPlan>
+﻿@model IEnumerable<Orion.Dtos.ContractIndexDto>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -23,14 +23,14 @@
         @foreach (var contract in Model)
         {
             <tr>
-                <td>@contract.Id</td>
-                <td>@contract.Contract.Username</td>
-                <td>@contract.Contract.Duration</td>
-                <td>@contract.Contract.DiscountRate %</td>
-                <td>@contract.Contract.GratisPeriod</td>
-                <td>@contract.Contract.IsActive</td>
-                <td>@contract.Plan.Name</td>
-                <td>@Html.ActionLink("Edit","Edit", "Contracts", new { id = contract.Id }, null)</td>
+                <td>@contract.ContractId</td>
+                <td>@contract.Username</td>
+                <td>@contract.Duration</td>
+                <td>@contract.DiscountRate %</td>
+                <td>@contract.GratisPeriod</td>
+                <td>@contract.IsActive</td>
+                <td>@contract.PlanNames</td>
+                <td>@Html.ActionLink("Edit","Edit", "Contracts", new { id = contract.ContractId }, null)</td>
             </tr>
         }
     </tbody>

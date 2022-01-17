@@ -1,31 +1,97 @@
-﻿@{
+﻿@model Orion.ViewModels.HomeViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<div class="col-12">
+    <div class="row">
+        <div class="col-4">
+            <h2>Contracts</h2>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Number of Active Contracts</th>
+                        <th>Number of Inactive Contracts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var statusItem in Model.ContractStatusDtos)
+                    {
+                        <tr>
+                            <td>@statusItem.ActiveContracts</td>
+                            <td>@statusItem.InactiveContracts</td>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+        </div>
+        <div class="col-8">
+            <h2>Last 5 created</h2>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Actions</th>
+                        <th>Contract Number</th>
+                        <th>Username</th>
+                        <th>Duration(Months)</th>
+                        <th>Discount Rate</th>
+                        <th>Gratis Period(Months)</th>
+                        <th>Status(Active)</th>
+                        <th>Plan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var contract in Model.LastFiveContractPlans)
+                    {
+                        <tr>
+                            <td>
+                                <div class="btn-toolbar" role="toolbar">
+                                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                                        @Html.ActionLink("Edit", "Edit", "Contracts", new { id = contract.ContractId }, new { @class = "btn btn-warning" })
+                                    </div>
+                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                        @Html.ActionLink("Delete", "Delete", "Home", new { id = contract.ContractId }, new { @class = "btn btn-danger" })
+                                    </div>
+                                </div>
+                            </td>
+                            <td>@contract.ContractId</td>
+                            <td>@contract.Username</td>
+                            <td>@contract.Duration</td>
+                            <td>@contract.DiscountRate %</td>
+                            <td>@contract.GratisPeriod</td>
+                            <td>@contract.IsActive</td>
+                            <td>@contract.PlanNames</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+
+</div>
+<div class="col-12">
+    <div class="row">
+
+        <h2>Profit report</h2>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Contract Number</th>
+                    <th>Profit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var contract in Model.ContractProfitDtos)
+                {
+                    <tr>
+                        <td>@contract.ContractId</td>
+                        <td>@contract.Profit</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>

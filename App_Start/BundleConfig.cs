@@ -14,7 +14,8 @@ namespace Orion
                 "~/scripts/bootbox.js",
                 "~/Scripts/respond.js",
                 "~/Scripts/DataTables/jquery.dataTables.min.js",
-                "~/Scripts/DataTables/dataTables.bootstrap4.min.js"
+                "~/Scripts/DataTables/dataTables.bootstrap4.min.js",
+                "~/Scripts/select2.js"
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -29,7 +30,8 @@ namespace Orion
                 "~/content/bootstrap.css",
                 "~/Content/DataTables/dataTables.bootstrap4.min.css",
                 //"~/content/toastr.css",
-                "~/Content/site.css"));
+                "~/Content/site.css",
+                "~/Content/css/select2.css"));
 
         }
     }

@@ -9,7 +9,8 @@ namespace Orion.ViewModels
     public class NewContractViewModel
     {
         public int Id { get; set; }
-        public int PlanId { get; set; }
+        [Required]
+        public int[] PlanIds { get; set; }
         public int ContractId { get; set; }
         [Required]
         public string Username { get; set; }
