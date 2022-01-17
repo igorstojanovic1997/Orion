@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Orion.Models.Contract>
+﻿@model IEnumerable<Orion.Models.ContractPlan>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,24 +8,31 @@
 
 <table class="table table-bordered table-hover">
     <thead>
-    <tr>
-        <th>Contract</th>
-        <th>Duration(Months)</th>
-        <th>Discount Rate</th>
-        <th>Fee(Dinars)</th>
-        <th>Gratis Period(Months)</th>
-    </tr>
+        <tr>
+            <th>Contract Number</th>
+            <th>Username</th>
+            <th>Duration(Months)</th>
+            <th>Discount Rate</th>
+            <th>Gratis Period(Months)</th>
+            <th>Status(Active)</th>
+            <th>Plan</th>
+            <th>Edit</th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var contract in Model)
-    {
-        <tr>
-            <td>@Html.ActionLink(contract.Username, "Details", "Contracts", new { id = contract.Id }, null)</td>
-            <td>@contract.ContractType.Duration</td>
-            <td>@contract.ContractType.DiscountRate%</td>
-            <td>@contract.ContractType.Fee</td>
-            <td>@contract.ContractType.GratisPeriod</td>
-        </tr>
-    }
+        @foreach (var contract in Model)
+        {
+            <tr>
+                <td>@contract.Id</td>
+                <td>@contract.Contract.Username</td>
+                <td>@contract.Contract.Duration</td>
+                <td>@contract.Contract.DiscountRate %</td>
+                <td>@contract.Contract.GratisPeriod</td>
+                <td>@contract.Contract.IsActive</td>
+                <td>@contract.Plan.Name</td>
+                <td>@Html.ActionLink("Edit","Edit", "Contracts", new { id = contract.Id }, null)</td>
+            </tr>
+        }
     </tbody>
 </table>
+@Html.ActionLink("Add New Contract", "New", null, new { @class = "btn btn-primary" })

@@ -181,6 +181,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\PlansController.cs" />
+    <Compile Include="Dtos\ContractDto.cs" />
+    <Compile Include="Dtos\ContractHistoryDto.cs" />
+    <Compile Include="Dtos\ContractStatusDto.cs" />
     <Compile Include="Dtos\PlanDto.cs" />
     <Compile Include="Mapping\MappingProfile.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -231,16 +234,58 @@
     <Compile Include="Migrations\202201151525552_CreatedContractHistory.Designer.cs">
       <DependentUpon>202201151525552_CreatedContractHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201161514384_UpdatedModel.cs" />
+    <Compile Include="Migrations\202201161514384_UpdatedModel.Designer.cs">
+      <DependentUpon>202201161514384_UpdatedModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201161523101_UpdateContractPlan.cs" />
+    <Compile Include="Migrations\202201161523101_UpdateContractPlan.Designer.cs">
+      <DependentUpon>202201161523101_UpdateContractPlan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201161550392_UpdateModel.cs" />
+    <Compile Include="Migrations\202201161550392_UpdateModel.Designer.cs">
+      <DependentUpon>202201161550392_UpdateModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201161600237_UpdateContractPlanModel.cs" />
+    <Compile Include="Migrations\202201161600237_UpdateContractPlanModel.Designer.cs">
+      <DependentUpon>202201161600237_UpdateContractPlanModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201161620397_UpdateContractPlanModelPrimaryKey.cs" />
+    <Compile Include="Migrations\202201161620397_UpdateContractPlanModelPrimaryKey.Designer.cs">
+      <DependentUpon>202201161620397_UpdateContractPlanModelPrimaryKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201161839095_UpdateContractHistory.cs" />
+    <Compile Include="Migrations\202201161839095_UpdateContractHistory.Designer.cs">
+      <DependentUpon>202201161839095_UpdateContractHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201161854187_UpdateContractHistoryDropPlanId.cs" />
+    <Compile Include="Migrations\202201161854187_UpdateContractHistoryDropPlanId.Designer.cs">
+      <DependentUpon>202201161854187_UpdateContractHistoryDropPlanId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201161901548_UpdateContractHistoryRevertDrop.cs" />
+    <Compile Include="Migrations\202201161901548_UpdateContractHistoryRevertDrop.Designer.cs">
+      <DependentUpon>202201161901548_UpdateContractHistoryRevertDrop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201162012281_AddDateTimeCreatedToContract.cs" />
+    <Compile Include="Migrations\202201162012281_AddDateTimeCreatedToContract.Designer.cs">
+      <DependentUpon>202201162012281_AddDateTimeCreatedToContract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201162026073_AddDateTimeCreatedNullable.cs" />
+    <Compile Include="Migrations\202201162026073_AddDateTimeCreatedNullable.Designer.cs">
+      <DependentUpon>202201162026073_AddDateTimeCreatedNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Contract.cs" />
     <Compile Include="Models\ContractHistory.cs" />
-    <Compile Include="Models\ContractType.cs" />
+    <Compile Include="Models\ContractPlan.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Plan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\Utilities.cs" />
+    <Compile Include="ViewModels\NewContractViewModel.cs" />
     <Compile Include="ViewModels\PlanFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -450,11 +495,10 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Plans\Random.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
-    <Content Include="Views\Contracts\Details.cshtml" />
     <Content Include="Views\Contracts\Index.cshtml" />
     <Content Include="Views\Plans\Index.cshtml" />
     <Content Include="Views\Plans\Details.cshtml" />
-    <Content Include="Views\Plans\PlanForm.cshtml" />
+    <Content Include="Views\Plans\Partials\_PlanForm.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -465,6 +509,8 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Contracts\ContractsForm.cshtml" />
+    <Content Include="Views\Contracts\EditForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -502,6 +548,36 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201151525552_CreatedContractHistory.resx">
       <DependentUpon>202201151525552_CreatedContractHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201161514384_UpdatedModel.resx">
+      <DependentUpon>202201161514384_UpdatedModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201161523101_UpdateContractPlan.resx">
+      <DependentUpon>202201161523101_UpdateContractPlan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201161550392_UpdateModel.resx">
+      <DependentUpon>202201161550392_UpdateModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201161600237_UpdateContractPlanModel.resx">
+      <DependentUpon>202201161600237_UpdateContractPlanModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201161620397_UpdateContractPlanModelPrimaryKey.resx">
+      <DependentUpon>202201161620397_UpdateContractPlanModelPrimaryKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201161839095_UpdateContractHistory.resx">
+      <DependentUpon>202201161839095_UpdateContractHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201161854187_UpdateContractHistoryDropPlanId.resx">
+      <DependentUpon>202201161854187_UpdateContractHistoryDropPlanId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201161901548_UpdateContractHistoryRevertDrop.resx">
+      <DependentUpon>202201161901548_UpdateContractHistoryRevertDrop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201162012281_AddDateTimeCreatedToContract.resx">
+      <DependentUpon>202201162012281_AddDateTimeCreatedToContract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201162026073_AddDateTimeCreatedNullable.resx">
+      <DependentUpon>202201162026073_AddDateTimeCreatedNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

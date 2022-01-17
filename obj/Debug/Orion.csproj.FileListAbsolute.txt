@@ -110,7 +110,6 @@ C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.PopulateContr
 C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.AppliedAnnotationsToContract.resources
 C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.AddedPropsForPlan.resources
 C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.UpdatedPropNameForContract.resources
-C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.csprojAssemblyReference.cache
 C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.PopulatePlans.resources
 C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.CreatedContractHistory.resources
 C:\Users\darko\source\repos\Orion\Orion\bin\AutoMapper.dll
@@ -121,3 +120,14 @@ C:\Users\darko\source\repos\Orion\Orion\bin\System.Web.Http.WebHost.dll
 C:\Users\darko\source\repos\Orion\Orion\bin\System.Net.Http.Formatting.xml
 C:\Users\darko\source\repos\Orion\Orion\bin\System.Web.Http.xml
 C:\Users\darko\source\repos\Orion\Orion\bin\System.Web.Http.WebHost.xml
+C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.UpdatedModel.resources
+C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.UpdateContractPlan.resources
+C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.UpdateModel.resources
+C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.UpdateContractPlanModel.resources
+C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.UpdateContractPlanModelPrimaryKey.resources
+C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.csprojAssemblyReference.cache
+C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.UpdateContractHistory.resources
+C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.UpdateContractHistoryDropPlanId.resources
+C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.UpdateContractHistoryRevertDrop.resources
+C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.AddDateTimeCreatedToContract.resources
+C:\Users\darko\source\repos\Orion\Orion\obj\Debug\Orion.Migrations.AddDateTimeCreatedNullable.resources

@@ -21,6 +21,7 @@ namespace Orion.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Contract> Contracts { get; set; }
+        public DbSet<ContractPlan> ContractPlans { get; set; }
         public DbSet<Plan> Plans { get; set; }
         public DbSet<ContractHistory> ContractHistories { get; set; }
         public ApplicationDbContext()

@@ -1,0 +1,98 @@
+﻿@model Orion.ViewModels.NewContractViewModel
+@{
+    ViewBag.Title = "ContractsForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var checkboxHiddenClass = Model.Id == 0 ? "d-none" : "";
+}
+
+@if (Model != null && Model.Id != 0)
+{
+    <h2>Edit Contract</h2>
+}
+else
+{
+    <h2>New Contract</h2>
+}
+
+<div class="container">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-6">
+                <div>
+                    @using (Html.BeginForm("Submit", "Contracts"))
+                    {
+
+                        @Html.HiddenFor(m => m.Id)
+                        @Html.HiddenFor(m => m.ContractId)
+                        @Html.HiddenFor(m => m.DateTimeCreated)
+                        @Html.ValidationSummary()
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Username)
+                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Username)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Duration)
+                            @Html.TextBoxFor(m => m.Duration, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Duration)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.DiscountRate)
+                            @Html.TextBoxFor(m => m.DiscountRate, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.DiscountRate)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.GratisPeriod)
+                            @Html.TextBoxFor(m => m.GratisPeriod, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.GratisPeriod)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.PlanId)
+                            @Html.DropDownListFor(m => m.PlanId, new SelectList(Model.Plans, "Id", "Name"), "Select Type", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.PlanId)
+                        </div>
+                        <div class="checkbox @checkboxHiddenClass">
+                            <label>
+                                @Html.CheckBoxFor(m => m.IsActive) Is Active?
+                            </label>
+                        </div>
+
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    }
+                </div>
+            </div>
+
+            @if (Model.Id != 0)
+            {
+                <div class="col-6">
+                    <h2>Contract history</h2>
+
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Date changed</th>
+                            <th>Active</th>
+                            <th>Sum</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var history in Model.ContractHistoryDtos)
+                        {
+                            <tr>
+                                <td>@history.DateTimeUpdated</td>
+                                <td>@history.Active</td>
+                                <td>@history.Sum</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+        
+    </div>
+</div>

@@ -60,7 +60,7 @@
 @section Scripts
 {
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             var table = $("table#plansTable").DataTable({
                 ajax: {
                     url: "api/plans",
@@ -81,7 +81,7 @@
                     },
                     {
                         data: "Id",
-                        render: function (data) {
+                        render: function(data) {
                             return "<div class='btn-toolbar' role='toolbar'><div class='btn-group mr-2' role='group'>" +
                                 "<button class='btn btn-danger js-delete' data-plan-id=" +
                                 data +
@@ -102,15 +102,15 @@
 
             $("table#plansTable").on("click",
                 ".js-delete",
-                function () {
+                function() {
                     var button = $(this);
                     bootbox.confirm("Are you sure you want to delete this plan?",
-                        function (result) {
+                        function(result) {
                             if (result) {
                                 $.ajax({
                                     url: "api/plans/" + button.attr("data-plan-id"),
                                     method: "DELETE",
-                                    success: function () {
+                                    success: function() {
                                         table.row(button.parents("tr")).remove().draw();
                                     }
                                 });
@@ -118,26 +118,56 @@
                         });
                 });
 
-            $('#submitBtn').click(function (event) {
-                event.preventDefault();
-                var url = $("#planForm").attr('action');
-                var method = $("#planForm").attr('method');
-                var formData = $("#planForm").serialize();
-
-                $.ajax({
-                    url: url,
-                    method: method,
-                    data: formData
-                }).done(function (data) {
-                    $("table#plansTable").DataTable().ajax.reload();
-                    if (data.message != undefined) {
-                        toastr.success(data.message);
-                    }
-                }).error(function () {
-
+            $("table#plansTable").on("click",
+                ".js-edit",
+                function() {
+                    var button = $(this);
+                    var id = button.attr("data-plan-id");
+                    $.ajax({
+                        url: '@Url.Action("EditPartial", "Plans")',
+                        method: 'GET',
+                        data: {
+                            id: id
+                        }
+                    }).done(function(data) {
+                        console.log("uspesno");
+                        if (data.view != undefined) {
+                            $("div#formDiv").html(data.view);
+                        }
+                    }).error(function() {
+                        toastr.error("Error rendering partial");
+                    });
                 });
 
-            });
+            $(document).on("click",
+                "#submitBtn",
+                function(event) {
+                    event.preventDefault();
+                    var url = $("#planForm").attr('action');
+                    var method = $("#planForm").attr('method');
+                    var formData = $("#planForm").serialize();
+
+                    $.ajax({
+                        url: url,
+                        method: method,
+                        data: formData
+                    }).done(function (data) {
+                        if (data.message != undefined && data.status != '@((int)HttpStatusCode.BadRequest)') {
+                            toastr.success(data.message);
+                            $("table#plansTable").DataTable().ajax.reload();
+                        }
+
+                        if (data.view != undefined) {
+                            $("div#formDiv").html(data.view);
+                            if (data.message != undefined) {
+                                toastr.error(data.message);
+                            }
+                        }
+                    }).error(function() {
+
+                    });
+
+                });
 
         });
     </script>

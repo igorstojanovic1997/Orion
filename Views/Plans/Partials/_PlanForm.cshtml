@@ -1,10 +1,6 @@
 ﻿@model Orion.ViewModels.PlanFormViewModel
-@{
-    ViewBag.Title = "Add/Edit plan";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
-@using (Html.BeginForm("Save", "Plans", FormMethod.Post))
+@using (Html.BeginForm("Save", "Plans", FormMethod.Post, new { id = "planForm" }))
 {
     <div class="hidden">
         @Html.HiddenFor(m => m.Id)
@@ -33,6 +29,6 @@
         @Html.ValidationMessageFor(m => m.Description)
     </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" id="submitBtn" class="btn btn-primary">Save</button>
 }
 
